@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# NOTE: Get it from gitlab
+PRIVATE_TOKEN='[YOUR PRIVATE TOKEN]'
+
+# NOTE: Get it from your project's setting page
+PROJECT_ID='[YOUR PROJECT ID]'
+
+# NOTE: URL should start from `[https|http]://`
+PROJECT_URL=$(git config remote.origin.url | cut -f2 | rev | cut -c 5- | rev)
+
+# NOTE: Set your commit hash
+COMMIT_HASH=$1
+
+# Get response
+curl_response=$(curl -s --request GET --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" https://gitlab.com/api/v4/projects/${PROJECT_ID}/repository/commits/${COMMIT_HASH}/merge_requests)
+
+# Convert response into json format
+response_json=$(echo "${curl_response}" | cut -c 2- | rev | cut -c 2- | rev)
+
+# MR's ID
+mr_id=$(echo "${response_json}" | jq -r '.iid')
+
+# NOTE: Choose your fav browser
+open -a "Google Chrome" ${PROJECT_URL}/merge_requests/${mr_id}
