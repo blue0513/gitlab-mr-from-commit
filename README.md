@@ -5,9 +5,13 @@ It works Not Only in Terminal but also Editor like Emacs!!
 
 This Project is fully respecting [This Project](http://blog.shibayu36.org/entry/2018/05/08/193000).
 
-[terminal](./images/terminal.gif)
+## How It Works
 
-[emacs](./images/emacs.gif)
+### on Terminal
+![terminal](./images/terminal.gif)
+
+### on Emacs
+![emacs](./images/emacs.gif)
 
 ## Quick Start on Terminal
 
