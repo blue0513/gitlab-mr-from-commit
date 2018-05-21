@@ -1,13 +1,13 @@
 # GitLab-MR-From-Commit
 
-Open MR page in GitLab associated with a Commit.
+Open MR page in GitLab associated with a Commit.  
 It works Not Only in Terminal but also Editor like Emacs!!
 
 This Project is fully respecting [This Project](http://blog.shibayu36.org/entry/2018/05/08/193000).
 
-<!-- [terminal]() -->
+[terminal](./images/terminal.gif)
 
-<!-- [emacs]() -->
+[emacs](./images/emacs.gif)
 
 ## Quick Start on Terminal
 
