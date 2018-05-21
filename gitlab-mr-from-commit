@@ -7,13 +7,17 @@ PRIVATE_TOKEN='[YOUR PRIVATE TOKEN]'
 PROJECT_ID='[YOUR PROJECT ID]'
 
 # NOTE: URL should start from `[https|http]://`
-PROJECT_URL=$(git config remote.origin.url | cut -f2 | rev | cut -c 5- | rev)
+# It should be like `https://gitlab.com`
+PROJECT_BASE_URL='[YOUR PROJECT BASE URL]'
 
-# NOTE: Set your commit hash
+# It should be `${PROJECT_BASE_URL}/my-project/product1`
+PROJECT_URL="${PROJECT_BASE_URL}/[YOUR PROJECT URL]"
+
+# NOTE: Set your commit hash as arg
 COMMIT_HASH=$1
 
 # Get response
-curl_response=$(curl -s --request GET --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" https://gitlab.com/api/v4/projects/${PROJECT_ID}/repository/commits/${COMMIT_HASH}/merge_requests)
+curl_response=$(curl -s --request GET --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" ${PROJECT_BASE_URL}/api/v4/projects/${PROJECT_ID}/repository/commits/${COMMIT_HASH}/merge_requests)
 
 # Convert response into json format
 response_json=$(echo "${curl_response}" | cut -c 2- | rev | cut -c 2- | rev)
