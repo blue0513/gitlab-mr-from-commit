@@ -56,7 +56,14 @@ $ gitlab-mr-from-commit [YOUR_COMMIT_HASH]
 $ brew intall tig
 ```
 
-#### 2. Execute with tig!!
+#### 2. Customize `.tigrc `
+
+```
+# In .tigrc, bind your fav key to execute command
+bind generic O @gitlab-mr-from-commit %(commit)
+```
+
+#### 3. Execute with tig!!
 
 ```sh
 # Open tig
