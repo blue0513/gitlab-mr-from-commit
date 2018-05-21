@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#########################################################
+
 # NOTE: Get it from gitlab
 PRIVATE_TOKEN='[YOUR PRIVATE TOKEN]'
 
@@ -13,17 +15,31 @@ PROJECT_BASE_URL='[YOUR PROJECT BASE URL]'
 # It should be `${PROJECT_BASE_URL}/my-project/product1`
 PROJECT_URL="${PROJECT_BASE_URL}/[YOUR PROJECT URL]"
 
+# Set your fav browser
+BROWSER='Google Chrome'
+
+#########################################################
+
 # NOTE: Set your commit hash as arg
 COMMIT_HASH=$1
 
-# Get response
-curl_response=$(curl -s --request GET --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" ${PROJECT_BASE_URL}/api/v4/projects/${PROJECT_ID}/repository/commits/${COMMIT_HASH}/merge_requests)
+#########################################################
 
-# Convert response into json format
-response_json=$(echo "${curl_response}" | cut -c 2- | rev | cut -c 2- | rev)
+# Open MR page associated with a commit hash on the browser
+# @param $1 commit hash
+main() {
 
-# MR's ID
-mr_id=$(echo "${response_json}" | jq -r '.iid')
+    # Get response from commit hash
+    curl_response=$(curl -s --request GET --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" ${PROJECT_BASE_URL}/api/v4/projects/${PROJECT_ID}/repository/commits/${COMMIT_HASH}/merge_requests)
 
-# NOTE: Choose your fav browser
-open -a "Google Chrome" ${PROJECT_URL}/merge_requests/${mr_id}
+    # Convert response into json format
+    response_json=$(echo "${curl_response}" | cut -c 2- | rev | cut -c 2- | rev)
+
+    # Get MR's id
+    mr_id=$(echo "${response_json}" | jq -r '.iid')
+
+    # Open MR page
+    open -a "${BROWSER}" ${PROJECT_URL}/merge_requests/${mr_id}
+}
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && main "$@"
