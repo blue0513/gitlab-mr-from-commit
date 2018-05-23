@@ -15,7 +15,7 @@ PROJECT_BASE_URL='[YOUR PROJECT BASE URL]'
 # NOTE: Directory should be `my-project/product1`
 PROJECT_DIRECTORY='[YOUR PROJECT DIRECTORY]'
 
-# It should be `httsp://gitlab.com/my-project/product1`
+# It should be `https://gitlab.com/my-project/product1`
 PROJECT_URL="${PROJECT_BASE_URL}/${PROJECT_DIRECTORY}"
 
 # Set your fav browser
